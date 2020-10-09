@@ -1021,13 +1021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcbfedcad2a9444a709862e52df95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  spriteArray:
-  - {fileID: 21300000, guid: 301ab088a974cb840b45a5f640784cbb, type: 3}
-  - {fileID: 21300000, guid: ee3b5c08e3446cb4fa4412df48503584, type: 3}
-  - {fileID: 21300000, guid: aaac3d07ebc69274892b83f47fc9b78e, type: 3}
-  - {fileID: 21300000, guid: 92a4f941e45c78a4e84482b889388662, type: 3}
-  - {fileID: 21300000, guid: 42f6ed5b8edacb343b136d36fce958ab, type: 3}
 --- !u!4 &1531725558
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,8 +1070,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -232.15}
-  m_SizeDelta: {x: 160, y: 102.112885}
+  m_AnchoredPosition: {x: -0.0000019073, y: -243}
+  m_SizeDelta: {x: 111.10401, y: 52.80771}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1626940492
 MonoBehaviour:
@@ -1098,12 +1091,12 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.003921569, g: 0.9686275, b: 0.8352942, a: 1}
+    m_HighlightedColor: {r: 0.01375042, g: 0.9716981, b: 0.17922834, a: 1}
+    m_PressedColor: {r: 0, g: 0.6509434, b: 0.5347968, a: 1}
+    m_SelectedColor: {r: 0.003921569, g: 0.9686275, b: 0.8352942, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1155,10 +1148,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1166,7 +1159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: RESTART
 --- !u!222 &1626940494
 CanvasRenderer:
   m_ObjectHideFlags: 0
