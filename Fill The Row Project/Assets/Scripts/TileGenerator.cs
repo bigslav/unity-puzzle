@@ -34,13 +34,13 @@ public class TileGenerator : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-
+            
             if (is_tile_selected == false) {
                 
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int gridPos = tileMap.WorldToCell(mousePos);
 
-                if (tileMap.HasTile(gridPos) && (tileMap.GetTile(gridPos) == empty || tileMap.GetTile(gridPos) == blocked))
+                if (tileMap.HasTile(gridPos) && (tileMap.GetTile(gridPos) == empty || tileMap.GetTile(gridPos) == blocked || (gridPos[1] == 2)))
                 {
                     
                 }
@@ -55,8 +55,8 @@ public class TileGenerator : MonoBehaviour
 
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int gridPos = tileMap.WorldToCell(mousePos);
-
-                if (tileMap.HasTile(gridPos) && (gridPos != selected_pos))
+                
+                if (tileMap.HasTile(gridPos) && (gridPos != selected_pos) && (gridPos[1]!=2))
                 {
 
                     if (((tileMap.GetTile(gridPos) != empty) && (tileMap.GetTile(gridPos) != blocked)))
@@ -161,24 +161,24 @@ public class TileGenerator : MonoBehaviour
             if (tileMap.GetTile(new Vector3Int(0, y, 0)) == yellow)
             {
                 yellow_count++;
-                Debug.Log("yellow: "+ yellow_count);
+                
             }
 
             if (tileMap.GetTile(new Vector3Int(2, y, 0)) == orange)
             {
                 orange_count++;
-                Debug.Log("orange: " + orange_count);
+                
             }
 
             if (tileMap.GetTile(new Vector3Int(4, y, 0)) == red)
             {
                 red_count++;
-                Debug.Log("red: " + red_count);
+                
             }
 
         }
 
-        Debug.Log("summ: "+ (yellow_count + orange_count + red_count));
+        
         if (yellow_count+orange_count+red_count == 15)
         {
             congrats_text.text = "YOU WON! WELL DONE!";
