@@ -59,18 +59,30 @@ public class TileGenerator : MonoBehaviour
                 if (tileMap.HasTile(gridPos) && (gridPos != selected_pos))
                 {
 
-                    if ((tileMap.GetTile(gridPos) != empty) || ((gridPos[0] != selected_pos[0]) && (gridPos[1] != selected_pos[1])) || ((Mathf.Abs(gridPos[0]-selected_pos[0])>1) || (Mathf.Abs(gridPos[1] - selected_pos[1]) > 1))) {
+                    if (((tileMap.GetTile(gridPos) != empty) && (tileMap.GetTile(gridPos) != blocked)))
+                    {
 
-                        
+                        tileMap.SetTile(selected_pos, selected_tile);
+                        selected_tile = tileMap.GetTile(gridPos);
+                        tileMap.SetTile(gridPos, pink);
+                        is_tile_selected = true;
+                        selected_pos = gridPos;
+
                     }
-                    else {
+                    else if ((tileMap.GetTile(gridPos) == empty) && ((gridPos[0] != selected_pos[0]) && (gridPos[1] != selected_pos[1])) || ((Mathf.Abs(gridPos[0] - selected_pos[0]) > 1) || (Mathf.Abs(gridPos[1] - selected_pos[1]) > 1)))
+                    {
+
+
+                    }
+                    else if ((tileMap.GetTile(gridPos) == empty) && !((gridPos[0] != selected_pos[0]) && (gridPos[1] != selected_pos[1])) || ((Mathf.Abs(gridPos[0] - selected_pos[0]) > 1) || (Mathf.Abs(gridPos[1] - selected_pos[1]) > 1)))
+                    {
                         TileBase tileHolder = tileMap.GetTile(gridPos);
 
                         tileMap.SetTile(gridPos, selected_tile);
                         tileMap.SetTile(selected_pos, tileHolder);
                         is_tile_selected = false;
                     }
-                    
+
                 }
                 else if (tileMap.HasTile(gridPos) && (gridPos == selected_pos))
                 {
