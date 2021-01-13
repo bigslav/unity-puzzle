@@ -6,12 +6,7 @@ using UnityEngine.Tilemaps;
 public class TileMapGenerator : MonoBehaviour
 {
     public Tilemap tileMap;
-    public TileBase empty;
-    public TileBase blocked;
-    public TileBase yellow;
-    public TileBase orange;
-    public TileBase red;
-    public TileBase pink;
+    public TileManager tileManager;
 
     private int[,] mapping;
 
@@ -40,7 +35,7 @@ public class TileMapGenerator : MonoBehaviour
         GenerateTileMap(false);
     }
 
-    private void GenerateTileMap(bool newMap = true)
+    public void GenerateTileMap(bool newMap = true)
     {
         mapping = GenerateMapping(newMap);
         for (int x = 0; x < 5; x++) 
@@ -50,19 +45,19 @@ public class TileMapGenerator : MonoBehaviour
                 switch (mapping[x, y]) 
                 {
                     case 0:
-                        tileMap.SetTile(new Vector3Int(x, y, 0), empty);
+                        tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTileBase("empty"));
                         break;
                     case 1:
-                        tileMap.SetTile(new Vector3Int(x, y, 0), blocked);
+                        tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTileBase("blocked"));
                         break;
                     case 2:
-                        tileMap.SetTile(new Vector3Int(x, y, 0), yellow);
+                        tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTileBase("yellow"));
                         break;
                     case 3:
-                        tileMap.SetTile(new Vector3Int(x, y, 0), orange);
+                        tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTileBase("orange"));
                         break;
                     case 4:
-                        tileMap.SetTile(new Vector3Int(x, y, 0), red);
+                        tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTileBase("red"));
                         break;
                 }
             }
