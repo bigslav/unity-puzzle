@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class TileGenerator : MonoBehaviour
+public class MonsterClass : MonoBehaviour
 {
     public TileBase empty;
     public TileBase blocked;
@@ -47,7 +47,6 @@ public class TileGenerator : MonoBehaviour
                     isTileSelected = true;
                     selectedTileBasePos = gridPos;   
                 }
-
             } 
             else if (isTileSelected == true) 
             {
@@ -143,7 +142,8 @@ public class TileGenerator : MonoBehaviour
         int orange_count = 0;
         int red_count = 0;
 
-        for (int y = -4; y <= 0; y++) {
+        for (int y = -4; y <= 0; y++) 
+        {
             if (tileMap.GetTile(new Vector3Int(0, y, 0)) == yellow)
             {
                 yellow_count++;
