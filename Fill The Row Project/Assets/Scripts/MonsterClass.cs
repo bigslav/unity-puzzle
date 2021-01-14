@@ -40,7 +40,7 @@ public class MonsterClass : MonoBehaviour
                 {
                     
                 }
-                else if(tileMap.HasTile(gridPos)) 
+                else if (tileMap.HasTile(gridPos)) 
                 {
                     selectedTileBase = tileMap.GetTile(gridPos);
                     tileMap.SetTile(gridPos, pink);
