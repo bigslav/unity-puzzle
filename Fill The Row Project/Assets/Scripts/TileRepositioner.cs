@@ -8,6 +8,7 @@ public class TileRepositioner : MonoBehaviour
     private Vector2 _mousePosition;
     public Tilemap tileMap;
     public TileManager tileManager;
+    public VictoryChecker victoryChecker;
     private bool isTileSelected;
     private TileBase selectedTileBase;
     private Vector3Int selectedTileBasePos;
@@ -20,38 +21,75 @@ public class TileRepositioner : MonoBehaviour
     public void OnMouseDown()
     {
         Vector3Int gridPos = tileMap.WorldToCell(_mousePosition);
-        if (isTileSelected == false)
+
+        if (tileMap.HasTile(gridPos)) 
         {
-            if (CheckIfTileCanBeSelected(gridPos))
+            if (isTileSelected == false)
             {
-                SelectTile(gridPos);
-            }
-        }
-        else if (isTileSelected == true)
-        {
-            SwapTiles(selectedTileBasePos, gridPos);
-            if (tileMap.HasTile(gridPos) && (gridPos != selectedTileBasePos) && (gridPos[1] != 2))
-            {
-                if (((tileMap.GetTile(gridPos).name == "empty") && (tileMap.GetTile(gridPos).name != "blocked")))
+                if (CheckIfTileCanBeSelected(gridPos))
                 {
-                    UnselectTile(selectedTileBasePos);
                     SelectTile(gridPos);
                 }
-                else if ((tileMap.GetTile(gridPos).name == "empty") && ((gridPos[0] != selectedTileBasePos[0]) && (gridPos[1] != selectedTileBasePos[1])) || ((Mathf.Abs(gridPos[0] - selectedTileBasePos[0]) > 1) || (Mathf.Abs(gridPos[1] - selectedTileBasePos[1]) > 1)))
-                {
-
-                }
-                else if ((tileMap.GetTile(gridPos).name == "empty") && !((gridPos[0] != selectedTileBasePos[0]) && (gridPos[1] != selectedTileBasePos[1])) || ((Mathf.Abs(gridPos[0] - selectedTileBasePos[0]) > 1) || (Mathf.Abs(gridPos[1] - selectedTileBasePos[1]) > 1)))
-                {
-                    SwapTiles(selectedTileBasePos, gridPos);
-
-                }
             }
-            else if (tileMap.HasTile(gridPos) && (gridPos == selectedTileBasePos))
+            else if (isTileSelected == true)
             {
-                tileMap.SetTile(gridPos, selectedTileBase);
-                isTileSelected = false;
+                if (gridPos != selectedTileBasePos)
+                {
+                    if (CheckIfTilesCanBeSwapped(selectedTileBasePos, gridPos))
+                    {
+                        SwapTiles(selectedTileBasePos, gridPos);
+                        victoryChecker.CheckForVictory();
+                    }
+                    else if (CheckIfTileIsInteractive(gridPos))
+                    {
+                        UnselectTile(selectedTileBasePos);
+                        SelectTile(gridPos);
+                    }
+                }
+                else
+                {
+                    UnselectTile(gridPos);
+                }
             }
+        }
+        
+    }
+
+    private bool CheckIfTileIsInteractive(Vector3Int gridPos)
+    {
+        if (tileMap.GetTile(gridPos).name != "empty" && tileMap.GetTile(gridPos).name != "blocked")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool CheckIfTilesCanBeSwapped(Vector3Int selectedGridPos, Vector3Int targetGridPos)
+    {
+        if (tileMap.GetTile(targetGridPos).name == "empty")
+        {
+            if ((selectedGridPos[0] == targetGridPos[0]) || (selectedGridPos[1] == targetGridPos[1]))
+            {
+                if ((Mathf.Abs(targetGridPos[0] - selectedGridPos[0]) == 1) || (Mathf.Abs(targetGridPos[1] - selectedGridPos[1]) == 1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else 
+        {
+            return false;
         }
     }
 
