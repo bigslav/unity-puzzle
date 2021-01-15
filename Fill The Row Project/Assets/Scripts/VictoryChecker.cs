@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class VictoryChecker : MonoBehaviour
 {
-    public Tilemap tileMap;
-
-    public string firstColumnTileColor;
-    public string secondColumnTileColor;
-    public string thirdColumnTileColor;
+    [SerializeField]
+    private Tilemap tileMap;
+    [SerializeField]
+    private string firstColumnTileColor;
+    [SerializeField]
+    private string secondColumnTileColor;
+    [SerializeField]
+    private string thirdColumnTileColor;
 
     private int firstColumnCounter;
     private int secondColumnCounter;

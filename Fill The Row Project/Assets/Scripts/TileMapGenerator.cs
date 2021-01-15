@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileMapGenerator : MonoBehaviour
 {
-    public Tilemap tileMap;
-    public TileManager tileManager;
+    [SerializeField]
+    private Tilemap tileMap;
+    [SerializeField]
+    private TileManager tileManager;
 
     private int[,] mapping;
-
     private int[,] mappingInteractiveLayout =
-        
     {
         { 3, 2, 3 },
         { 4, 2, 3 },
@@ -19,9 +17,7 @@ public class TileMapGenerator : MonoBehaviour
         { 3, 3, 2 },
         { 4, 4, 2 }
     };
-
     private readonly int[,] mappingBlockLayout =
-
     {
         { 0, 1, 0, 1, 0 },
         { 0, 0, 0, 0, 0 },
@@ -97,23 +93,23 @@ public class TileMapGenerator : MonoBehaviour
 
     private void ShuffleMatrix(int[,] values)
     {
-        int num_rows = values.GetUpperBound(0) + 1;
-        int num_cols = values.GetUpperBound(1) + 1;
-        int num_cells = num_rows * num_cols;
+        int numberOfRows = values.GetUpperBound(0) + 1;
+        int numberOfColumns = values.GetUpperBound(1) + 1;
+        int numberOfCells = numberOfRows * numberOfColumns;
 
         System.Random rand = new System.Random();
-        for (int i = 0; i < num_cells - 1; i++)
+        for (int i = 0; i < numberOfCells - 1; i++)
         {
-            int j = rand.Next(i, num_cells);
+            int j = rand.Next(i, numberOfCells);
 
-            int row_i = i / num_cols;
-            int col_i = i % num_cols;
-            int row_j = j / num_cols;
-            int col_j = j % num_cols;
+            int rowI = i / numberOfColumns;
+            int colI = i % numberOfColumns;
+            int rowJ = j / numberOfColumns;
+            int colJ = j % numberOfColumns;
 
-            int temp = values[row_i, col_i];
-            values[row_i, col_i] = values[row_j, col_j];
-            values[row_j, col_j] = temp;
+            int temp = values[rowI, colI];
+            values[rowI, colI] = values[rowJ, colJ];
+            values[rowJ, colJ] = temp;
         }
     }
 }

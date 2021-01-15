@@ -1,22 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileRepositioner : MonoBehaviour
 {
-    private Vector2 _mousePosition;
-    public Tilemap tileMap;
-    public TileManager tileManager;
-    public VictoryChecker victoryChecker;
-    private bool isTileSelected;
-    private TileBase selectedTileBase;
-    private Vector3Int selectedTileBasePos;
+    [SerializeField]
+    private Tilemap tileMap;
+    [SerializeField]
+    private TileManager tileManager;
+    [SerializeField]
+    private VictoryChecker victoryChecker;
 
-    public void SetMousePosition(Vector2 mousePosition) 
-    {
-        _mousePosition = mousePosition;
-    }
+    private Vector2 _mousePosition;
+    private bool _isTileSelected;
+    private TileBase _selectedTile;
+    private Vector3Int _selectedTilePos;
 
     public void OnMouseDown()
     {
@@ -24,25 +21,25 @@ public class TileRepositioner : MonoBehaviour
 
         if (tileMap.HasTile(gridPos)) 
         {
-            if (isTileSelected == false)
+            if (_isTileSelected == false)
             {
                 if (CheckIfTileCanBeSelected(gridPos))
                 {
                     SelectTile(gridPos);
                 }
             }
-            else if (isTileSelected == true)
+            else if (_isTileSelected == true)
             {
-                if (gridPos != selectedTileBasePos)
+                if (gridPos != _selectedTilePos)
                 {
-                    if (CheckIfTilesCanBeSwapped(selectedTileBasePos, gridPos))
+                    if (CheckIfTilesCanBeSwapped(_selectedTilePos, gridPos))
                     {
-                        SwapTiles(selectedTileBasePos, gridPos);
+                        SwapTiles(_selectedTilePos, gridPos);
                         victoryChecker.CheckForVictory();
                     }
                     else if (CheckIfTileIsInteractive(gridPos))
                     {
-                        UnselectTile(selectedTileBasePos);
+                        UnselectTile(_selectedTilePos);
                         SelectTile(gridPos);
                     }
                 }
@@ -52,7 +49,11 @@ public class TileRepositioner : MonoBehaviour
                 }
             }
         }
-        
+    }
+
+    public void SetMousePosition(Vector2 mousePosition)
+    {
+        _mousePosition = mousePosition;
     }
 
     private bool CheckIfTileIsInteractive(Vector3Int gridPos)
@@ -107,23 +108,23 @@ public class TileRepositioner : MonoBehaviour
 
     private void UnselectTile(Vector3Int gridPos)
     {
-        tileMap.SetTile(gridPos, selectedTileBase);
-        isTileSelected = false;
+        tileMap.SetTile(gridPos, _selectedTile);
+        _isTileSelected = false;
     }
 
     private void SelectTile(Vector3Int gridPos)
     {
-        selectedTileBase = tileMap.GetTile(gridPos);
+        _selectedTile = tileMap.GetTile(gridPos);
         tileMap.SetTile(gridPos, tileManager.GetTileBase("pink"));
-        selectedTileBasePos = gridPos;
-        isTileSelected = true;
+        _selectedTilePos = gridPos;
+        _isTileSelected = true;
     }
 
     private void SwapTiles(Vector3Int gridPosSelected, Vector3Int gridPosTarget)
     {
         TileBase tileHolder = tileMap.GetTile(gridPosTarget);
-        tileMap.SetTile(gridPosTarget, selectedTileBase);
+        tileMap.SetTile(gridPosTarget, _selectedTile);
         tileMap.SetTile(gridPosSelected, tileHolder);
-        isTileSelected = false;
+        _isTileSelected = false;
     }
 }

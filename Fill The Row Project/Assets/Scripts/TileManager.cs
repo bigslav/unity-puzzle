@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileManager: MonoBehaviour
 {
-    public Tile[] tiles;
+    [SerializeField]
+    private Tile[] tiles;
 
     public TileBase GetTileBase(string name)
     {

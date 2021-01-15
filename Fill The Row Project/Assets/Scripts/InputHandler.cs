@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class InputHandler : MonoBehaviour
 {
-    public TileRepositioner tileRepositioner;
-    public Tilemap tileMap;
+    [SerializeField]
+    private TileRepositioner tileRepositioner;
+    [SerializeField]
+    private Tilemap tileMap;
 
-    void Update()
+    private void Update()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         tileRepositioner.SetMousePosition(mousePos);
