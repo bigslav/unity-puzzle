@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class TileRepositioner : MonoBehaviour
 {
     [SerializeField] private Tilemap tileMap;
     [SerializeField] private TileManager tileManager;
-    [SerializeField] private VictoryChecker victoryChecker;
+    [SerializeField] private TurnProcessor turnProcessor;
 
     private Vector2 _mousePosition;
     private bool _isTileSelected;
@@ -35,7 +36,8 @@ public class TileRepositioner : MonoBehaviour
                         SwapTiles(_selectedTilePos, gridPos);
                         Destroy(_tileSelection);
 
-                        victoryChecker.CheckForVictory();
+                        turnProcessor.CountTurn();
+                        turnProcessor.CheckForVictory();
                     }
                     else if (CheckIfTileIsInteractive(gridPos))
                     {
@@ -117,7 +119,7 @@ public class TileRepositioner : MonoBehaviour
     {
         _selectedTile = tileMap.GetTile(gridPos);
         _selectedTilePos = gridPos;
-        _tileSelection = Instantiate(Resources.Load("tileSelection"), tileMap.CellToLocal(new Vector3Int(-gridPos.x, gridPos.y, 0)), Quaternion.identity) as GameObject;
+        _tileSelection = Instantiate(Resources.Load("tileSelectionSprite"), tileMap.CellToLocal(new Vector3Int(-gridPos.x, gridPos.y, 0)), Quaternion.identity) as GameObject;
         _isTileSelected = true;
     }
 

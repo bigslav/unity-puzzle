@@ -6,8 +6,8 @@ public class TileMapGenerator : MonoBehaviour
     [SerializeField] private Tilemap tileMap;
     [SerializeField] private TileManager tileManager;
 
-    private int[,] mapping;
-    private int[,] mappingInteractiveLayout =
+    private int[,] _mapping;
+    private int[,] _mappingInteractiveLayout =
     {
         { 3, 2, 3 },
         { 4, 2, 3 },
@@ -15,7 +15,7 @@ public class TileMapGenerator : MonoBehaviour
         { 3, 3, 2 },
         { 4, 4, 2 }
     };
-    private readonly int[,] mappingBlockLayout =
+    private readonly int[,] _mappingBlockLayout =
     {
         { 0, 1, 0, 1, 0 },
         { 0, 0, 0, 0, 0 },
@@ -24,19 +24,14 @@ public class TileMapGenerator : MonoBehaviour
         { 0, 1, 0, 1, 0 }
     };
 
-    private void Start()
+    public void GenerateTileMap()
     {
-        GenerateTileMap(false);
-    }
-
-    public void GenerateTileMap(bool newMap = true)
-    {
-        mapping = GenerateMapping(newMap);
+        _mapping = GenerateRandomMapping();
         for (int x = 0; x < 5; x++)
         {
             for (int y = 0; y < 5; y++)
             {
-                switch (mapping[x, y])
+                switch (_mapping[x, y])
                 {
                     case 0:
                         tileMap.SetTile(new Vector3Int(x, y, 0), tileManager.GetTile("empty"));
@@ -58,14 +53,11 @@ public class TileMapGenerator : MonoBehaviour
         }
     }
 
-    private int[,] GenerateMapping(bool newMapping)
+    private int[,] GenerateRandomMapping()
     {
-        mapping = mappingBlockLayout;
+        _mapping = _mappingBlockLayout;
 
-        if (newMapping)
-        {
-            ShuffleMatrix(mappingInteractiveLayout);
-        }
+        ShuffleMatrix(_mappingInteractiveLayout);
 
         for (int y = 0; y < 5; y++)
         {
@@ -74,19 +66,19 @@ public class TileMapGenerator : MonoBehaviour
                 switch (x)
                 {
                     case 0:
-                        mapping[y, 0] = mappingInteractiveLayout[y, x];
+                        _mapping[y, 0] = _mappingInteractiveLayout[y, x];
                         break;
                     case 1:
-                        mapping[y, 2] = mappingInteractiveLayout[y, x];
+                        _mapping[y, 2] = _mappingInteractiveLayout[y, x];
                         break;
                     case 2:
-                        mapping[y, 4] = mappingInteractiveLayout[y, x];
+                        _mapping[y, 4] = _mappingInteractiveLayout[y, x];
                         break;
                 }
             }
         }
 
-        return mapping;
+        return _mapping;
     }
 
     private void ShuffleMatrix(int[,] values)
