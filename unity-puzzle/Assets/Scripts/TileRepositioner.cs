@@ -60,7 +60,7 @@ public class TileRepositioner : MonoBehaviour
 
     private bool CheckIfTileIsInteractive(Vector3Int gridPos)
     {
-        if (tileMap.GetTile(gridPos).name != "empty" && tileMap.GetTile(gridPos).name != "blocked")
+        if (tileMap.GetTile(gridPos).name != "Empty" && tileMap.GetTile(gridPos).name != "Blocked")
         {
             return true;
         }
@@ -72,7 +72,7 @@ public class TileRepositioner : MonoBehaviour
 
     private bool CheckIfTilesCanBeSwapped(Vector3Int selectedGridPos, Vector3Int targetGridPos)
     {
-        if (tileMap.GetTile(targetGridPos).name == "empty")
+        if (tileMap.GetTile(targetGridPos).name == "Empty")
         {
             if ((selectedGridPos[0] == targetGridPos[0]) || (selectedGridPos[1] == targetGridPos[1]))
             {
@@ -98,7 +98,7 @@ public class TileRepositioner : MonoBehaviour
 
     private bool CheckIfTileCanBeSelected(Vector3Int gridPos)
     {
-        if (tileMap.HasTile(gridPos) && !(tileMap.GetTile(gridPos).name == "empty" || tileMap.GetTile(gridPos).name == "blocked"))
+        if (tileMap.HasTile(gridPos) && !(tileMap.GetTile(gridPos).name == "Empty" || tileMap.GetTile(gridPos).name == "Blocked"))
         {
             return true;
         }
@@ -119,7 +119,7 @@ public class TileRepositioner : MonoBehaviour
     {
         _selectedTile = tileMap.GetTile(gridPos);
         _selectedTilePos = gridPos;
-        _tileSelection = Instantiate(Resources.Load("tileSelectionSprite"), tileMap.CellToLocal(new Vector3Int(-gridPos.x, gridPos.y, 0)), Quaternion.identity) as GameObject;
+        _tileSelection = Instantiate(Resources.Load("TileSelectionSprite"), tileMap.CellToLocal(new Vector3Int(-gridPos.x, gridPos.y, 0)), Quaternion.identity) as GameObject;
         _isTileSelected = true;
     }
 
