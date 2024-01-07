@@ -1,5 +1,5 @@
 # unity-puzzle
-Puzzle game made with Unity and C#.
+Puzzle game prototype made with Unity and C#.
 Play it here: https://bigslav.itch.io/puzzle
 
 The goal of the game is to fill three columns with corresponding color. The game ends when colors are at their places. The game can be restarted any time and provide new random level for player.
